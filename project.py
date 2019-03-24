@@ -122,42 +122,42 @@ def multiclick_button():
     global level
     global multipleClickers
     if multipleClickers == 1 and score >= priceArray[2] and level > 1:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[2]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 2 and score >= priceArray[3] and level > 2:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[3]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 3 and score >= priceArray[4] and level > 3:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[4]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 4 and score >= priceArray[5] and level > 4:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[5]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 5 and score >= priceArray[6] and level > 5:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[6]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 6 and score >= priceArray[7] and level > 6:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[7]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 7 and score >= priceArray[8] and level > 7:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[8]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
     elif multipleClickers == 8 and score >= priceArray[9] and level > 8:
-        multipleClickers *= 2
+        multipleClickers += 1
         score -= priceArray[9]
         ClickerLabel.config(text="Points:" + str(score))
         multiClickButton.config(text="MultipleClicker X " + str(multipleClickers))
@@ -265,9 +265,13 @@ def multiclick_color_button():
     global score
     global level
     global multipleClickers
-    if multipleClickers < level and score >= priceArray[multipleClickers // 2 + 2]:
-        multiClickButton.config(bg="orange")
+    if multipleClickers < level and score >= priceArray[multipleClickers + 1]:
+        multiClickButton.config(text="MultipleClickers", bg="orange")
     else:
+        if multipleClickers == level:
+            multiClickButton.config(text="Next level required")
+        else:
+            multiClickButton.config(text=str(-priceArray[multipleClickers + 1] + score))
         multiClickButton.config(bg="white")
 
 
@@ -281,8 +285,12 @@ def autoclick_color_button():
     global level
     global autoClickers
     if autoClickers < level and score >= priceArray[autoClickers + 1]:
-        autoClickButton.config(bg="orange")
+        autoClickButton.config(text="AutoClickers", bg="orange")
     else:
+        if autoClickers == level:
+            autoClickButton.config(text="Next level required")
+        else:
+            autoClickButton.config(text=str(-priceArray[autoClickers + 1] + score))
         autoClickButton.config(bg="white")
 
 
@@ -299,11 +307,11 @@ def game(event):
     lvl_color_button()
     multiclick_color_button()
     autoclick_color_button()
-    score += multipleClickers
+    score += multipleClickers ** 3
     ClickerLabel.config(text="Points:" + str(score))
     levelButton.pack()
     multiClickButton.place(x=1, y=240)
-    autoClickButton.place(x=1212, y=240)
+    autoClickButton.place(x=1195, y=240)
     quitButton.place(x=1, y=660)
 
 
