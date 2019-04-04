@@ -63,7 +63,7 @@ def level_button():
         score -= priceArray[level]
         LevelLabel.config(text="Level:" + str(level))
         ClickerLabel.config(text="Points:" + str(score))
-        if level == 1:
+        if level == 2:
             StartLabel.config(text="Press ENTER to get YAN out of bed!")
         elif level == 5:
             StartLabel.config(text="You are in the middle of the road!")
